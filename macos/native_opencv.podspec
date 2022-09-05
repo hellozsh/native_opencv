@@ -26,14 +26,6 @@ A new flutter plugin project.
    s.xcconfig = { 'OTHER_LDFLAGS' => '-framework opencv2' }
 #   包括 OpenCV 框架
    s.vendored_frameworks = 'opencv2.xcframework'
-
-#    # 告诉 CocoaPods 不要删除框架
-#    s.preserve_paths = 'opencv2.framework'
-#    # 告诉链接器包含 opencv2 框架
-#    s.xcconfig = { 'OTHER_LDFLAGS' => '-framework opencv2' }
-#    # 包括 OpenCV 框架
-#    s.vendored_frameworks = 'opencv2.framework'
-
   # 包括原生框架
   s.frameworks = 'AVFoundation', 'Accelerate', 'OpenCL'
   # 包括 C++ 库
