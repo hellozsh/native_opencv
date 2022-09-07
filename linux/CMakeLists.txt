@@ -11,7 +11,8 @@ add_library(${PLUGIN_NAME} SHARED
   "native_opencv.cpp"
 )
 
-set("OpenCV_DIR" $ENV{OpenCV_DIR})
+set("OpenCV_DIR" /home/dev/opencv/build)
+#set("OpenCV_DIR" $ENV{OpenCV_DIR})
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
