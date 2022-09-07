@@ -32,7 +32,7 @@
 			- git clone https://github.com/opencv/opencv
 			- python3 ~/dev/lib/opencv/platforms/apple/build_xcframework.py --macos_archs=x86_64,arm64 --build_only_specified_archs --out ./build_xcframework
 			- 生成如下：
-			- ![截屏2022-09-05 上午10.27.27.png](../assets/截屏2022-09-05_上午10.27.27_1662344853194_0.png)
+			- ![截屏2022-09-05 上午10.27.27.png](./截屏2022-09-05_上午10.27.27_1662344853194_0.png)
 			- 将opencv2.xcframework放到macos文件夹下，同级native_opencv.podspec下写上：
 			-
 			  ```
@@ -98,4 +98,4 @@
 					  					  # set("OpenCV_DIR" $ENV{OpenCV_DIR})
 					  					  set("OpenCV_DIR" /home/west/dev/lib/opencv/build)
 					  ```
--  
+-
