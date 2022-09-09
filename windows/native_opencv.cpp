@@ -52,6 +52,43 @@ extern "C" {
     }
 
     FUNCTION_ATTRIBUTE
+    void enhance(char* inputImagePath, char* outputImagePath, double num) {
+        Mat image = imread(inputImagePath);
+        Mat filter;
+        double factor = num / 25.0 -2;
+        blur(image, filter, Size(5, 5), Point(-1, -1), BORDER_DEFAULT);
+        Mat ret(image.rows, image.cols, image.type());
+        for (int i = 0; i < ret.rows; i++) {
+           for (int j = 0; j < ret.cols; j++) {
+               Vec3b rgb = image.at<Vec3b>(i,j);
+               Vec3b frgb = filter.at<Vec3b>(i,j);
+               ret.at<Vec3b>(i,j)=Vec3b(rgb[0]+factor*(rgb[0]-frgb[0]),rgb[1]+factor*(rgb[1]-frgb[1]),rgb[2]+factor*(rgb[2]-frgb[2]));
+           }
+        }
+        imwrite(outputImagePath, ret);
+    }
+
+    FUNCTION_ATTRIBUTE
+    void adjustBrightnessContrast(char* inputImagePath, char* outputImagePath, double brightness, double contrast) { //
+
+          Mat image = imread(inputImagePath);
+          Mat imgdst;
+          double factor = contrast * 5.1 - 255;
+          double factor2 = brightness / 50.0;
+          image.convertTo(imgdst, image.type(),factor2,factor);
+          imwrite(outputImagePath, imgdst);
+
+    }
+
+    FUNCTION_ATTRIBUTE
+    void draw_lines_add_chromosomes(char* inputImagePath, char* outputImagePath, Point points[]) {
+
+
+       // 还需要修改染色体数量
+    }
+
+
+    FUNCTION_ATTRIBUTE
     void process_image(char* inputImagePath, char* outputImagePath) {
         Mat input = imread(inputImagePath, IMREAD_GRAYSCALE);
         Mat threshed, withContours;
@@ -67,4 +104,5 @@ extern "C" {
 
         imwrite(outputImagePath, withContours);
     }
+
 }

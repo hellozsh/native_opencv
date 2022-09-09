@@ -3,7 +3,10 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  desktop_multi_window
+  menubar
   native_opencv
+  window_size
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
