@@ -1,5 +1,6 @@
 #include <opencv2/opencv.hpp>
 
+
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32)
 #define IS_WIN32
 #endif
@@ -45,6 +46,13 @@ void platform_log(const char *fmt, ...) {
 
 // Avoiding name mangling
 extern "C" {
+
+    class MyStruct {
+        public:
+            double a;
+            double b;
+    };
+
     // Attributes to prevent 'unused' function from being removed and to make it visible
    FUNCTION_ATTRIBUTE
     const char* version() {
@@ -80,11 +88,34 @@ extern "C" {
 
     }
 
+
     FUNCTION_ATTRIBUTE
-    void draw_lines_add_chromosomes(char* inputImagePath, char* outputImagePath, Point points[]) {
+    void draw_lines_add_chromosomes(char* inputImagePath, char* outputImagePath, MyStruct* points, int pointLength) {
+
+         
+        cout << pointLength << " length..." << endl;
 
 
-       // 还需要修改染色体数量
+        // sizeof(arr) / sizeof(*arr)
+        Mat img = imread(inputImagePath);
+        Mat useMask = Mat::zeros(img.rows, img.cols, img.type());
+        vector<cv::Point> vPoints;
+        for(int i = 0; i < pointLength; i = i + 1 ) {
+            
+            cout << (points+i)->a << " a..." << endl;
+//            cout << (points+i)->a << " b..." << endl;
+
+//            vPoints.push_back(Point(p.x()+800,p.y()+600));
+//            printf("a 的值： %d\n", (points+i)->a);
+        }
+//        for(Point p:points) {
+//             vPoints.push_back(Point(p.x()+800,p.y()+600));
+//        }
+//        vector<vector<Point>> contours;
+//        contours.push_back(points);
+//        fillPoly(useMask,contours,Scalar(1,1,1));
+//        imwrite(outputImagePath, img);
+        // 还需要修改染色体数量
     }
 
 

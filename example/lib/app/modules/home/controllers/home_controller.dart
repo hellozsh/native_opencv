@@ -217,9 +217,11 @@ class HomeController extends GetxController {
     // 画图
   }
   onPanEnd(DragEndDetails detail) {
-    log('onPanUpdate${detail}');
+    log('onPanEnd${detail}');
     // 画图
-    points.clear();
+    // points.clear();
+    drawLinesAddChromosomes(filePath, '/Users/zhousuhua/Desktop/flutterwindow/plugin/native_opencv/example/lib/util/test_drawLinesAddChromosomes.png', points);
+
   }
 
   rightMenuEvents(String title) {

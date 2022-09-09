@@ -1,5 +1,6 @@
 #include <opencv2/opencv.hpp>
 
+
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32)
 #define IS_WIN32
 #endif
@@ -81,10 +82,24 @@ extern "C" {
     }
 
     FUNCTION_ATTRIBUTE
-    void draw_lines_add_chromosomes(char* inputImagePath, char* outputImagePath, Point points[]) {
+    void draw_lines_add_chromosomes(char* inputImagePath, char* outputImagePath, Point[] *points) {
 
-
-       // 还需要修改染色体数量
+        print(points);
+        Mat img = imread(inputImagePath);
+        Mat useMask = Mat::zeros(img.rows, img.cols, img.type());
+        vector<cv::Point> vPoints;
+        for( int a = 0; a < p; a = a + 1 )
+           {
+              printf("a 的值： %d\n", a);
+           }
+        for(Point p:points) {
+             vPoints.push_back(Point(p.x()+800,p.y()+600));
+        }
+        vector<vector<Point>> contours;
+        contours.push_back(points);
+        fillPoly(useMask,contours,Scalar(1,1,1));
+        imwrite(outputImagePath, img);
+        // 还需要修改染色体数量
     }
 
 

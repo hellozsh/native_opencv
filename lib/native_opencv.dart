@@ -5,7 +5,9 @@ import 'dart:developer';
 import 'dart:ffi' as ffi;
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:ui';
 import 'package:ffi/ffi.dart';
+import 'package:flutter/animation.dart';
 
 part 'src/constant/constant.dart';
 
@@ -63,6 +65,19 @@ void adjustBrightnessContrast(String inputPath, String outputPath, double bright
 }
 
 // 画线添加染色体
-void drawLinesAddChromosomes(String inputPath, String outputPath, List points) {
-  _drawLinesAddChromosomes(inputPath.toNativeUtf8(), outputPath.toNativeUtf8());
+void drawLinesAddChromosomes(String inputPath, String outputPath, List<Offset> points) {
+  final pointer = calloc<MyStruct>(points.length);
+
+  // final c = pointer.ref;
+  // c.a = 1.0;
+  // c.b = 11.0;
+
+  for (int i = 0; i < points.length; i++) {
+    pointer[i].a = points[i].dx;
+    pointer[i].b = points[i].dy;
+  }
+
+  _drawLinesAddChromosomes(inputPath.toNativeUtf8(), outputPath.toNativeUtf8(), pointer, points.length);
+
+  calloc.free(pointer);
 }
