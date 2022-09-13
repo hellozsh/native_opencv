@@ -86,23 +86,23 @@ class HomeView extends GetView<HomeController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: GestureDetector(
-                      onPanStart: (details) {
-                        log('1234556${details}');
-                        logic.onPanStart(details);
-                      },
-                      onPanUpdate: (details) {
-                        log('onPanUpdate${details}');
-                        logic.onPanUpdate(details);
-                      },
-                      onPanEnd: (details) {
-                        log('onPanUpdate${details}');
-                        logic.onPanEnd(details);
-                      },
-                      child: Center(
-                          child: Image.file(File(logic.filePath))
+                    child: Center(
+                      child: GestureDetector(
+                        onPanStart: (details) {
+                          log('1234556${details}');
+                          logic.onPanStart(details);
+                        },
+                        onPanUpdate: (details) {
+                          log('onPanUpdate${details}');
+                          logic.onPanUpdate(details);
+                        },
+                        onPanEnd: (details) {
+                          log('onPanUpdate${details}');
+                          logic.onPanEnd(details);
+                        },
+                        child: Image.file(File(logic.filePath)),
                       ),
-                    ),
+                    )
                   ),
                   DecoratedBox(
                     decoration: BoxDecoration(

@@ -207,21 +207,25 @@ class HomeController extends GetxController {
 
 
   void onPanStart(DragStartDetails detail) {
-    log('onPanUpdate${detail}');
+    log('${detail}----${detail.globalPosition} ----- ${detail.localPosition}');
     points.clear();
     points.add(detail.localPosition);
+
   }
   void onPanUpdate(DragUpdateDetails detail) {
-    log('onPanUpdate${detail}');
+    log('${detail}----${detail.globalPosition} ----- ${detail.localPosition}');
+
     points.add(detail.localPosition);
     // 画图
   }
   onPanEnd(DragEndDetails detail) {
-    log('onPanEnd${detail}');
-    // 画图
+    log('${points}');
+    log('${points.length}');
+
+
+    // 画图, 记得是 在图片中的坐标，不然会画错位
     // points.clear();
     drawLinesAddChromosomes(filePath, '/Users/zhousuhua/Desktop/flutterwindow/plugin/native_opencv/example/lib/util/test_drawLinesAddChromosomes.png', points);
-
   }
 
   rightMenuEvents(String title) {

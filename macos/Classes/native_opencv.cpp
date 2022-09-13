@@ -22,6 +22,9 @@
     #define FUNCTION_ATTRIBUTE __declspec(dllexport)
 #endif
 
+
+#define w 400
+
 using namespace cv;
 using namespace std;
 
@@ -47,10 +50,10 @@ void platform_log(const char *fmt, ...) {
 // Avoiding name mangling
 extern "C" {
 
-    class MyStruct {
+    class MyPoint {
         public:
-            double a;
-            double b;
+            double x;
+            double y;
     };
 
     // Attributes to prevent 'unused' function from being removed and to make it visible
@@ -90,32 +93,35 @@ extern "C" {
 
 
     FUNCTION_ATTRIBUTE
-    void draw_lines_add_chromosomes(char* inputImagePath, char* outputImagePath, MyStruct* points, int pointLength) {
+    void draw_lines_add_chromosomes(char* inputImagePath, char* outputImagePath, MyPoint* points, int pointLength) {
 
-         
         cout << pointLength << " length..." << endl;
-
-
+        
         // sizeof(arr) / sizeof(*arr)
-        Mat img = imread(inputImagePath);
-        Mat useMask = Mat::zeros(img.rows, img.cols, img.type());
         vector<cv::Point> vPoints;
         for(int i = 0; i < pointLength; i = i + 1 ) {
-            
-            cout << (points+i)->a << " a..." << endl;
-//            cout << (points+i)->a << " b..." << endl;
 
-//            vPoints.push_back(Point(p.x()+800,p.y()+600));
-//            printf("a 的值： %d\n", (points+i)->a);
+            cout << (points+i)->x << " a..." << endl;
+            cout << (points+i)->x << " b..." << endl;
+            vPoints.push_back(Point((points+i)->x,(points+i)->y));
         }
-//        for(Point p:points) {
-//             vPoints.push_back(Point(p.x()+800,p.y()+600));
-//        }
-//        vector<vector<Point>> contours;
-//        contours.push_back(points);
-//        fillPoly(useMask,contours,Scalar(1,1,1));
-//        imwrite(outputImagePath, img);
+           
+        cout << vPoints << " length..." << endl;
+        Mat img = imread(inputImagePath);
+        Mat mask = Mat::zeros(img.rows, img.cols, img.type());
+        vector<vector<cv::Point>> contours;
+        contours.push_back(vPoints);
+        fillPoly(img, contours,Scalar(1,1,1));
+        imwrite(outputImagePath, img);
+        
+//        fillPoly(mask,contours,cv::Scalar(1,1,1));
+//        Mat s3;
+//        bitwise_or(img, mask, s3);
+//        imwrite(outputImagePath, s3);
+
         // 还需要修改染色体数量
+        
+
     }
 
 

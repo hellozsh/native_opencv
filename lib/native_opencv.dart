@@ -66,15 +66,16 @@ void adjustBrightnessContrast(String inputPath, String outputPath, double bright
 
 // 画线添加染色体
 void drawLinesAddChromosomes(String inputPath, String outputPath, List<Offset> points) {
-  final pointer = calloc<MyStruct>(points.length);
+  final pointer = calloc<MyPoint>(points.length);
 
   // final c = pointer.ref;
   // c.a = 1.0;
   // c.b = 11.0;
 
   for (int i = 0; i < points.length; i++) {
-    pointer[i].a = points[i].dx;
-    pointer[i].b = points[i].dy;
+    pointer[i].x = points[i].dx;
+    pointer[i].y = points[i].dy;
+    log('================= ${pointer[i].x}---${pointer[i].y}');
   }
 
   _drawLinesAddChromosomes(inputPath.toNativeUtf8(), outputPath.toNativeUtf8(), pointer, points.length);
